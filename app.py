@@ -1,6 +1,17 @@
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, session
 import json, os
 from functools import wraps
+from spotify import search_for_song, get_token
+
+load_dotenv()
+
+spotify_token = get_token()
+'''
+songs = search_for_song(spotify-token, "Buddy Holly" )
+for idx, song in enumerate(songs):
+    print(f"{idx + 1}. {song["name"]}, https://open.spotify.com/track/{song["id"]}")
+'''
 
 def login_required(f):
     @wraps(f)

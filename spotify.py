@@ -66,7 +66,7 @@ def search_for_song(token, song_name):
 
 
 token = get_token()
-
+'''
 result = search_for_artist(token, "weezer")
 artist_id = result["id"]
 songs = get_songs_by_artist(token, artist_id)
@@ -78,4 +78,3 @@ for idx, song in enumerate(songs):
 songs = search_for_song(token, "Buddy Holly" )
 for idx, song in enumerate(songs):
     print(f"{idx + 1}. {song["name"]}, https://open.spotify.com/track/{song["id"]}")
-'''
