@@ -4,19 +4,36 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
-<div class="passbg">
-    <form method="POST">
-    <table class="logintable">
-        <tbody>
-            <tr><td class="loginmail"><input placeholder="Username:" id="username" name="username" class="loginemailinput" required></td></tr>
-            <tr><td class="loginpassword"><input class="loginpasswordinput" id="password" name="password" placeholder="Password:" type="password" required></td></tr>
-            {% if error %}
-                <tr><td><p style="color:red">{{ error }}</p>
-            {% endif %}
-            <tr><td class="loginsubmit"><button class="loginsubmitbutton" type="submit">Log In Now</a></button></td></tr>
-        </tbody>
-</table>
-</form>
-</div> 
+<div class="doesntmatter">
+    <div class="passbg">
+        <button class="signup_popupbutton" id="signup_popupbutton">Sign up here.</button>
+        <form method="POST">
+        <table class="logintable">
+            <tbody>
+                <tr><td class="loginmail"><input placeholder="Username:" id="username" name="username" class="loginemailinput" required></td></tr>
+                <tr><td class="loginpassword"><input class="loginpasswordinput" id="password" name="password" placeholder="Password:" type="password" required></td></tr>
+                {% if error %}
+                    <tr><td><p style="color:red">{{ error }}</p>
+                {% endif %}
+                <tr><td class="loginsubmit"><button class="loginsubmitbutton" type="submit">Log In Now</a></button></td></tr>
+            </tbody>
+    </table>
+    </form>
+    </div>
+    <div class="passbg" id="signupwindow" style="visibility: hidden;">
+        <form method="POST">
+        <table class="logintable">
+            <tbody>
+                <tr><td class="loginmail"><input placeholder="Username:" id="username" name="username" class="loginemailinput" required></td></tr>
+                <tr><td class="loginpassword"><input class="loginpasswordinput" id="password" name="password" placeholder="Password:" type="password" required></td></tr>
+                {% if error %}
+                    <tr><td><p style="color:red">{{ error }}</p>
+                {% endif %}
+                <tr><td class="loginsubmit"><button class="loginsubmitbutton" type="submit">Log In Now</a></button></td></tr>
+            </tbody>
+        </table>
+        </form>
+    </div> 
+</div>
 </body>
 </html>
