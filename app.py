@@ -1,5 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import json, os
+from functools import wraps
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "username" not in session:
+            return redirect(url_for("login"))
+        return f(*args, **kwargs)
+    return decorated_function
+
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"  # required for session handling
@@ -55,10 +65,11 @@ def signup():
 
 
 @app.route("/editlesson")
+@login_required
 def editlesson():
-    if "username" not in session:
-        return redirect(url_for("login"))
     return render_template("editlesson.html", username=session["username"])
+
+
 
 
 @app.route("/logout")
