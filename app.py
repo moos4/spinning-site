@@ -64,9 +64,11 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/editlesson")
+@app.route("/editlesson", methods=["GET", "POST"])
 @login_required
 def editlesson():
+    if request.method == "POST":
+        return
     return render_template("editlesson.html", username=session["username"])
 
 
