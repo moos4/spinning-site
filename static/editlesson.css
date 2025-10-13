@@ -1,3 +1,7 @@
+body {
+    background-color: rgba(0, 146, 255, 0.3);
+    font-family: tahoma;
+}
 div.infobeam {
     background-color: white;
     width: 100%;
@@ -5,22 +9,18 @@ div.infobeam {
     box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.5);
     padding: 2px;
 }
-body {
-    background-color: rgba(0, 146, 255, 0.3);
-    font-family: tahoma;
-}
-table.infotable, td.infocell {
-    border: none;
-}
-.infocell {
-    width: 33%;
-    height: 100%;
-    padding: 0px;
-}
-.infotable {
-    height: 100%;
+table.infotable {
     width: 100%;
-    margin: 0px;
+    height: 100%;
+    margin: 0;
+    table-layout: fixed; /* 💡 This is essential */
+    border-collapse: collapse;
+}
+td.infocell {
+    height: 100%;
+    padding: 0;
+    border: 1px solid black;
+    width: 1%;
 }
 .plus_song {
     position: fixed;
@@ -57,6 +57,8 @@ table.infotable, td.infocell {
     padding: 15px;
     position: fixed;
     top: 50%;
+    display: grid;
+    align-items: center;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.2);
@@ -65,7 +67,6 @@ table.infotable, td.infocell {
     font-family: tahoma;
     font-size: 175%;
     font-weight: blold;
-    margin: 5px 5px 5px 5px;
 }
 .cancelgui {
     position: absolute;
@@ -92,6 +93,7 @@ table.infotable, td.infocell {
     border-bottom: 1px solid black !important;
     border: none;
     outline: none;
+    width: 200px;
 }
 .logoutbutton {
     position: absolute;
@@ -126,3 +128,27 @@ a:visited, a:hover, a:active {
     text-decoration: none;
     color: black;
 }
+.songsearch {
+  position: relative;
+  display: inline-block;
+}
+.songdropdown {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 200px;
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  max-height: 300px;
+  font-size: 75%;
+   overflow-y: scroll;
+}
+.songdropdown a {
+  color: black;
+  padding: 5px 16px;
+  text-decoration: none;
+  display: block;
+}
+.show {display: block;}
+
+.songdropdown a:hover { background-color: #f6f6f6;}
