@@ -5,16 +5,16 @@
 </head>
 <body>
 <div class="container">
-  <h2>Login</h2>
+  <h2>Sign Up</h2>
   <form method="POST">
     <input placeholder="Username" name="username" required><br>
     <input placeholder="Password" name="password" type="password" required><br>
     {% if error %}
       <p style="color:red">{{ error }}</p>
     {% endif %}
-    <button type="submit">Log In</button>
+    <button type="submit">Create Account</button>
   </form>
-  <p>Don’t have an account? <a href="{{ url_for('signup') }}">Sign up here</a>.</p>
+  <p>Already have an account? <a href="{{ url_for('login') }}">Log in here</a>.</p>
 </div>
 </body>
 </html>
