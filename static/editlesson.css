@@ -1,0 +1,95 @@
+div.infobeam {
+    background-color: white;
+    width: 100%;
+    height: 150px;
+    box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.5);
+    padding: 2px;
+}
+body {
+    background-color: rgba(0, 146, 255, 0.3);
+    font-family: tahoma;
+}
+table.infotable, td.infocell {
+    border: none;
+}
+.infocell {
+    width: 33%;
+    height: 100%;
+    padding: 0px;
+}
+.infotable {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+.plus_song {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    width: 60px;
+    height: 60px;
+    background-color: palegreen;
+    border: none;
+    border-radius: 50%;
+
+    font-size: 36px;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+}
+
+.plus_song:hover {
+    transform: scale(1.05);
+}
+.addsong_gui {
+    width: 370px;
+    height: 370px;
+    background-color: white;
+    border-radius: 10px;
+    visibility: hidden;
+    padding: 15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.2);
+}
+.addsong_guititle {
+    font-family: tahoma;
+    font-size: 175%;
+    font-weight: blold;
+    margin: 5px 5px 5px 5px;
+}
+.cancelgui {
+    position: absolute;
+    top: 10px;    /* distance from the top edge */
+    right: 10px;  /* distance from the right edge */
+    
+    width: 24px;
+    height: 24px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 50%;
+
+    font-size: 20px;
+    color: darkgray;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.searchsonginput {
+    border-bottom: 1px solid black !important;
+    border: none;
+    outline: none;
+}

@@ -1,0 +1,78 @@
+ body {
+    background-color:rgba(0, 146, 255, 0.3);
+    font-family: tahoma;
+}
+.loginemailinput, .loginpasswordinput {
+	border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    display: block;
+    margin: 0 auto;
+}
+.loginsubmitbutton {
+	border: none;
+    background-color: lightblue;
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.loginsubmitbutton:hover {
+    transform: scale(1.02);
+}
+table {
+    margin: auto;
+    position: relative
+}
+a:link {
+    text-decoration: none;
+    color: black;
+}
+a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: black;
+}
+.passbg {
+    background-color: white;
+    width: 400px;
+    height: 300px;
+    margin-left: calc(50% - 200px);
+    margin-top: 10%;
+    display: grid;
+    align-items: center;
+    border-radius: 10px;
+    font-family: Tahoma;
+    position: relative;
+}
+
+.signup_popupbutton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: lightblue;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    border: none;
+    outline: none;
+
+    width: auto;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.signup_popupbutton:hover {
+    transform: scale(1.02);
+}
