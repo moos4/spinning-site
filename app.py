@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import json, os
 from functools import wraps
 from spotify import search_for_song, get_token
@@ -7,11 +7,7 @@ from spotify import search_for_song, get_token
 load_dotenv()
 
 spotify_token = get_token()
-'''
-songs = search_for_song(spotify-token, "Buddy Holly" )
-for idx, song in enumerate(songs):
-    print(f"{idx + 1}. {song["name"]}, https://open.spotify.com/track/{song["id"]}")
-'''
+
 
 def login_required(f):
     @wraps(f)
@@ -79,7 +75,7 @@ def signup():
 @login_required
 def editlesson():
     if request.method == "POST":
-        return
+        searchprompt = request.form.get("searchsong")
     return render_template("editlesson.html", username=session["username"])
 
 
@@ -89,6 +85,23 @@ def editlesson():
 def logout():
     session.pop("username", None)
     return redirect(url_for("login"))
+
+@app.route("/search_songs")
+@login_required
+def search_songs():
+    query = request.args.get("q", "").strip()
+    if not query:
+        return jsonify([])
+
+    songs = search_for_song(spotify_token, query)
+    results = [
+        {
+            "name": song["name"],
+            "url": f"https://open.spotify.com/track/{song['id']}"
+        }
+        for song in songs
+    ]
+    return jsonify(results)
 
 
 if __name__ == "__main__":
