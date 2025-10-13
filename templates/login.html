@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
-<div class="container">
-  <h2>Login</h2>
-  <form method="POST">
-    <input placeholder="Username" name="username" required><br>
-    <input placeholder="Password" name="password" type="password" required><br>
-    {% if error %}
-      <p style="color:red">{{ error }}</p>
-    {% endif %}
-    <button type="submit">Log In</button>
-  </form>
-  <p>Don’t have an account? <a href="{{ url_for('signup') }}">Sign up here</a>.</p>
+<div class="doesntmatter">
+    <div class="passbg">
+        <a class="signup_popupbutton" id="signup_popupbutton" href="{{ url_for('signup') }}" >Sign up here.</a>
+        <form method="POST">
+        <table class="logintable">
+            <tbody>
+                <tr><td class="loginmail"><input placeholder="Username:" id="username" name="username" class="loginemailinput" required></td></tr>
+                <tr><td class="loginpassword"><input class="loginpasswordinput" id="password" name="password" placeholder="Password:" type="password" required></td></tr>
+                {% if error %}
+                    <tr><td><p style="color:red">{{ error }}</p>
+                {% endif %}
+                <tr><td class="loginsubmit"><button class="loginsubmitbutton" type="submit">Log In Now</a></button></td></tr>
+            </tbody>
+    </table>
+    </form>
+    </div>
 </div>
 </body>
 </html>
