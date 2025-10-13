@@ -23,11 +23,15 @@
 
 <div Id="addsong_gui"class="addsong_gui">
 <p class="addsong_guititle">Add a song</p> <button onclick="closeaddsong_gui()" class="cancelgui">&times;</button>
-<input class="searchsonginput" placeholder="Browse songs:">
+<div class="songsearch">
+    <input class="searchsonginput" placeholder="Browse songs:" id="searchsonginput" onkeyup="filterFunction()" onfocus="showlist(this)">
+    <div class="songdropdown" id="songdropdown">
+        <a href="doesnt matter">Buddy Holly</a>
+    </div>
+</div>
 <p class="song_info_p" id="bmp">debugging</p>
 <p class="song_info_p" id="energy">debugging</p>
 <p class="song_info_p" id="duration">debugging</p>
-
 
 </div>
 
