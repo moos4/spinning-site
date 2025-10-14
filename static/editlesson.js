@@ -48,9 +48,11 @@ async function fetchSongs() {
     // dynamically add songs to dropdown
     songs.forEach(song => {
       const link = document.createElement("a");
-      link.href = song.url;
+      // link.href = song.url;
+      link.onclick = "selectsong(self.id)"
       link.textContent = song.name;
       link.target = "_blank";
+      link.id = song.url
       dropdown.appendChild(link);
     });
 
@@ -62,4 +64,8 @@ async function fetchSongs() {
   } catch (err) {
     console.error("Error fetching songs:", err);
   }
+}
+
+function selectsong(songid) {
+  console.log(songid.id);
 }
