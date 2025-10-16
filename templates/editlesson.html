@@ -5,13 +5,15 @@
 <script type="text/javascript" src="{{ url_for('static', filename='editlesson.js') }}"></script>
 </head>
 
-<body>
-    <a class="logoutbutton" href="{{ url_for('logout') }}">Log out</a>
+<body onload="piechart([130,120,50,60])">
+    <a class="genericbutton" href="{{ url_for('logout') }}">Log out</a>
     <div class="infobeam">
     <table class="infotable">
         <tbody>
             <tr>
-                <td class="infocell"></td>
+            <td class="infocell">
+                <canvas id="energychart" width="150" height="150"></canvas>
+            </td>
                 <td class="infocell"></td>
                 <td class="infocell"></td>
             </tr>
@@ -43,7 +45,7 @@
 <p class="song_info_p" id="energy"><b>Engery:</b>&nbsp;<span>debugging</span></p>
 <br>
 <p class="song_info_p" id="duration"><b>Duration:</b>&nbsp;<span>debugging</span></p>
-
+<button class="addsongbutton; genericbutton" type="submit" id="addsongbutton">Add Song</button>
 </div>
 
 </body>

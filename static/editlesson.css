@@ -96,7 +96,7 @@ td.infocell {
     outline: none;
     width: 200px;
 }
-.logoutbutton {
+.genericbutton {
     position: absolute;
     bottom: 20px;
     right: 20px;
@@ -118,7 +118,7 @@ td.infocell {
     cursor: pointer;
     transition: transform 0.3s ease;
 }
-.logoutbutton:hover {
+.genericbutton:hover {
     transform: scale(1.02);
 }
 a:link {
@@ -156,4 +156,8 @@ a:visited, a:hover, a:active {
 
 .song_info_p {
     margin: 5px 0px;
+}
+
+#energychart {
+    z-index: 999;
 }
