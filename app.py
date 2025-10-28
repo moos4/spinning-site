@@ -21,7 +21,7 @@ def login_required(f):
 app = Flask(__name__)
 app.secret_key = "supersecretkey"  # required for session handling
 
-USERS_FILE = "venv/users.json"
+USERS_FILE = "users.json"
 
 
 def load_users():
