@@ -21,14 +21,14 @@ def login_required(f):
 app = Flask(__name__)
 app.secret_key = "supersecretkey"  # required for session handling
 
-USERS_FILE = "users.json"
+USERS_FILE = "venv/users.json"
 
 
 def load_users():
     if not os.path.exists(USERS_FILE):
         return {}
     with open(USERS_FILE, "r") as f:
-        return json.load(f)
+        return json.load(f)    
 
 
 def save_users(users):
@@ -36,7 +36,7 @@ def save_users(users):
         json.dump(users, f)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         username = request.form.get("username")
