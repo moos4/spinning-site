@@ -49,9 +49,8 @@ async function fetchSongs() {
     songs.forEach(song => {
       const link = document.createElement("a");
       // link.href = song.url;
-      link.onclick = "selectsong(self.id)"
+      link.onclick = function() { selectsong(link); };
       link.textContent = song.name;
-      link.target = "_blank";
       link.id = song.url
       dropdown.appendChild(link);
     });
@@ -66,8 +65,8 @@ async function fetchSongs() {
   }
 }
 
-function selectsong(songid) {
-  console.log(songid.id);
+function selectsong(song) {
+  console.log(song.id);
 }
 
 //piechart
