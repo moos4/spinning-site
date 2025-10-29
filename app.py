@@ -122,13 +122,7 @@ def get_song_stats():
     stats = {
         "bpm": round(data.get("tempo", 0), 2),
         "energy": data.get("energy"),
-        "danceability": data.get("danceability"),
-        "valence": data.get("valence"),
-        "acousticness": data.get("acousticness"),
-        "instrumentalness": data.get("instrumentalness"),
-        "liveness": data.get("liveness"),
-        "speechiness": data.get("speechiness"),
-        "time_signature": data.get("time_signature")
+        "duration_ms": data.get("duration_ms")
     }
 
     return jsonify(stats)
