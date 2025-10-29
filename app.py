@@ -35,7 +35,9 @@ def save_users(users):
     with open(USERS_FILE, "w") as f:
         json.dump(users, f)
 
-
+@app.route("/", methods=["GET"])
+def main():
+    return render_template("index.html")
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -104,28 +106,41 @@ def search_songs():
     return jsonify(results)
 
 
-@app.route("/get_song_stats")
+@app.route("/get_song_data")
 @login_required
-def get_song_stats():
-    song_id = request.args.get("id", "").strip()
+def get_song_data():
+    song_id = request.args.get("q", "").strip()
     if not song_id:
         return jsonify({"error": "Missing song ID"}), 400
 
     headers = {"Authorization": f"Bearer {spotify_token}"}
 
-    res = requests.get(f"https://api.spotify.com/v1/audio-features/{song_id}", headers=headers)
-    if res.status_code != 200:
-        return jsonify({"error": "Failed to fetch audio features"}), res.status_code
+    # --- Get basic track info (name, album, cover, etc.) ---
+    track_res = requests.get(f"https://api.spotify.com/v1/tracks/{song_id}", headers=headers)
+    if track_res.status_code != 200:
+        return jsonify({"error": "Failed to fetch track data"}), track_res.status_code
+    track = track_res.json()
 
-    data = res.json()
+    # --- Get audio features (BPM, energy, etc.) ---
+    features_res = requests.get(f"https://api.spotify.com/v1/audio-features/{song_id}", headers=headers)
+    if features_res.status_code != 200:
+        features = {}
+    else:
+        features = features_res.json()
 
-    stats = {
-        "bpm": round(data.get("tempo", 0), 2),
-        "energy": data.get("energy"),
-        "duration_ms": data.get("duration_ms")
+    # --- Merge the two sets of data ---
+    song_data = {
+        "id": track["id"],
+        "name": track["name"],
+        "album_cover": track["album"]["images"][0]["url"] if track["album"]["images"] else None,
+        "duration_ms": track["duration_ms"],
+
+        # Audio features
+        "bpm": round(features.get("tempo", 0), 2) if features else None,
+        "energy": features.get("energy") if features else None
     }
 
-    return jsonify(stats)
+    return jsonify(song_data)
 
 if __name__ == "__main__":
     app.run(debug=True)
