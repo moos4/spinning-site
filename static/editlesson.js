@@ -47,12 +47,12 @@ async function fetchSongs() {
 
     // dynamically add songs to dropdown
     songs.forEach(song => {
-      const link = document.createElement("a");
-      // link.href = song.url;
-      link.onclick = function() { selectsong(link); };
-      link.textContent = song.name;
-      link.id = song.url
-      dropdown.appendChild(link);
+      const songButton = document.createElement("a");
+      // link.href = song.url; url is removed and replaced by songId
+      songButton.onclick = function() { selectsong(songButton); };
+      songButton.textContent = song.name;
+      songButton.id = song.songId
+      dropdown.appendChild(songButton);
     });
 
     dropdown.classList.add("show");
@@ -66,6 +66,9 @@ async function fetchSongs() {
 }
 
 function selectsong(song) {
+  bpmSpan = document.getElementById("bpm")
+  energySpan = document.getElementById("energy")
+  durationSpan = document.getElementById("duration")
   console.log(song.id);
 }
 

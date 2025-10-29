@@ -97,12 +97,41 @@ def search_songs():
     results = [
         {
             "name": song["name"],
-            "url": f"https://open.spotify.com/track/{song['id']}"
+            "songId": f"{song['id']}"
         }
         for song in songs
     ]
     return jsonify(results)
 
+
+@app.route("/get_song_stats")
+@login_required
+def get_song_stats():
+    song_id = request.args.get("id", "").strip()
+    if not song_id:
+        return jsonify({"error": "Missing song ID"}), 400
+
+    headers = {"Authorization": f"Bearer {spotify_token}"}
+
+    res = requests.get(f"https://api.spotify.com/v1/audio-features/{song_id}", headers=headers)
+    if res.status_code != 200:
+        return jsonify({"error": "Failed to fetch audio features"}), res.status_code
+
+    data = res.json()
+
+    stats = {
+        "bpm": round(data.get("tempo", 0), 2),
+        "energy": data.get("energy"),
+        "danceability": data.get("danceability"),
+        "valence": data.get("valence"),
+        "acousticness": data.get("acousticness"),
+        "instrumentalness": data.get("instrumentalness"),
+        "liveness": data.get("liveness"),
+        "speechiness": data.get("speechiness"),
+        "time_signature": data.get("time_signature")
+    }
+
+    return jsonify(stats)
 
 if __name__ == "__main__":
     app.run(debug=True)
