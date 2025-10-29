@@ -65,11 +65,43 @@ async function fetchSongs() {
   }
 }
 
-function selectsong(song) {
-  bpmSpan = document.getElementById("bpm")
-  energySpan = document.getElementById("energy")
-  durationSpan = document.getElementById("duration")
-  console.log(song.id);
+async function selectsong(song) {
+  // Elements
+  const titleSpan = document.getElementById("selectedSongTitle");
+  const bpmSpan = document.getElementById("selectedSongBpm");
+  const energySpan = document.getElementById("selectedSongEnergy");
+  const durationSpan = document.getElementById("selectedSongDuration");
+  const cover = document.getElementById("selectedSongImage");
+
+  // Optional: clear out old data while loading
+  titleSpan.textContent = "Loading...";
+  bpmSpan.textContent = "";
+  energySpan.textContent = "";
+  durationSpan.textContent = "";
+  cover.src = "";
+
+  try {
+    // Fetch detailed song data from your Flask backend
+    const response = await fetch(`/get_song_data?q=${encodeURIComponent(song.id)}`);
+    if (!response.ok) throw new Error("Failed to load song data");
+
+    const data = await response.json();
+
+    // Update the UI
+    titleSpan.textContent = `${data.name} — ${data.artists.join(", ")}`;
+    bpmSpan.textContent = data.bpm ? `${data.bpm} BPM` : "N/A";
+    energySpan.textContent = data.energy !== null ? `${Math.round(data.energy * 100)}% energy` : "N/A";
+    durationSpan.textContent = data.duration_min ? `${data.duration_min} min` : "N/A";
+    cover.src = data.album_cover || "";
+
+  } catch (err) {
+    console.error(err);
+    titleSpan.textContent = "Error loading song data";
+    bpmSpan.textContent = "";
+    energySpan.textContent = "";
+    durationSpan.textContent = "";
+    cover.src = "";
+  }
 }
 
 //piechart
