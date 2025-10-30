@@ -8,4 +8,5 @@ i dont have time to make a good readme i have to get back to coding
 
 The site: not online yet
 
-note from drad **:3**
+note from drad 
+>:3
