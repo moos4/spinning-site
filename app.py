@@ -35,9 +35,20 @@ def save_users(users):
     with open(USERS_FILE, "w") as f:
         json.dump(users, f)
 
+'''
+Drad here is a tutorial on how to add pages
+
+@app.route("/thelink/withmaybesublinks", methods=["GET"])
+def anythingyouwantaslongasitisunderthat^():
+    return render_template("directiontoyourfile.html")
+
+'''
+
 @app.route("/", methods=["GET"])
 def main():
     return render_template("index.html")
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
