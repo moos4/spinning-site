@@ -48,6 +48,9 @@ def anythingyouwantaslongasitisunderthat^():
 def main():
     return render_template("index.html")
 
+@app.errorhandler(404)
+def not_found(e):
+  return render_template("404.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
