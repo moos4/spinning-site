@@ -1,1 +1,8 @@
-{"admin": "password"}
+{
+  "0": {
+    "username": "testuser",
+    "email": "testemail@gmail.com",
+    "password": "hashedpass (IS INCORRECT ATM BECAUSE NOT A REAL HASH)",
+    "verified": true
+  }
+}

@@ -10,12 +10,13 @@
         <form method="POST">
         <table class="logintable">
             <tbody>
-                <tr><td class="loginmail"><input placeholder="Username:" id="username" name="username" class="loginemailinput" required></td></tr>
+                <tr><td class="loginusername"><input placeholder="Username:" id="username" name="username" class="loginusernameinput" required></td></tr>
+                <tr><td class="loginmail"><input placeholder="Email:" id="email" name="email" class="loginemailinput" required></td></tr>
                 <tr><td class="loginpassword"><input class="loginpasswordinput" id="password" name="password" placeholder="Password:" type="password" required></td></tr>
                 {% if error %}
                     <tr><td><p style="color:red">{{ error }}</p>
                 {% endif %}
-                <tr><td class="loginsubmit"><button class="loginsubmitbutton" type="submit">Sign Up Now</a></button></td></tr>
+                <tr><td class="loginsubmit"><button class="loginsubmitbutton" type="submit">Sign Up Now</button></td></tr>
             </tbody>
     </table>
     </form>
