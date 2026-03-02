@@ -14,7 +14,7 @@
     "2": {
         "username": "wetesting",
         "email": "mers.kaas.wat@gmail.com",
-        "password": "scrypt:32768:8:1$IM4h0McudrnzxLg5$d3583afbd1b371cd90c567fa74fa18b119b7ec2d48998da2c96717ca9612d4728767273d686f19f85bbe8513fa2cb5eb531148b28eba07bfe33244885dc1a63f",
+        "password": "scrypt:32768:8:1$voUke3sEjivAfOIE$ea55c2bf6ac0a9ad89809bad7c7af5fa8eb6817626493475b082cc04d755d0b3318580a40537929e9fe42c68a338663fa4df3adfef8e57e63504c41831735feb",
         "verified": true
     }
 }
