@@ -49,7 +49,7 @@ async function fetchSongs() {
     songs.forEach(song => {
       const songButton = document.createElement("a");
       // link.href = song.url; url is removed and replaced by songId
-      songButton.onclick = function() { selectsong(songButton); };
+      songButton.onclick = function() { selectsong(song.songId); };
       songButton.textContent = song.name;
       songButton.id = song.songId
       dropdown.appendChild(songButton);
@@ -65,7 +65,7 @@ async function fetchSongs() {
   }
 }
 
-async function selectsong(song) {
+async function selectsong(songId) {
   // Elements
   const titleSpan = document.getElementById("selectedSongTitle");
   const bpmSpan = document.getElementById("selectedSongBpm");
@@ -82,16 +82,16 @@ async function selectsong(song) {
 
   try {
     // Fetch detailed song data from your Flask backend
-    const response = await fetch(`/get_song_data?q=${encodeURIComponent(song.id)}`);
+    const response = await fetch(`/get_song_data?q=${encodeURIComponent(songId)}`);
     if (!response.ok) throw new Error("Failed to load song data");
 
     const data = await response.json();
 
     // Update the UI
     titleSpan.textContent = `${data.name} — ${data.artists.join(", ")}`;
-    bpmSpan.textContent = data.bpm ? `${data.bpm} BPM` : "N/A";
+    bpmSpan.textContent = data.bpm !== null ? `${data.bpm} BPM` : "N/A";
     energySpan.textContent = data.energy !== null ? `${Math.round(data.energy * 100)}% energy` : "N/A";
-    durationSpan.textContent = data.duration_min ? `${data.duration_min} min` : "N/A";
+    durationSpan.textContent = data.duration ? `${data.duration}` : "N/A";
     cover.src = data.album_cover || "";
 
   } catch (err) {

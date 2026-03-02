@@ -1,16 +1,16 @@
+#RUN: source venv/bin/activate && python app.py
+#TAB: https://5000-firebase-spinning-site-1772184200699.cluster-64pjnskmlbaxowh5lzq6i7v4ra.cloudworkstations.dev
+
 from dotenv import load_dotenv # pip install python-dotenv
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
-import json, os, re
+import json, os, re, requests
 from functools import wraps
-from spotify import search_for_song, get_token
+from spotify import search_for_song, get_token, get_auth_header
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import URLSafeTimedSerializer
 from flask_mail import Mail, Message #use pip install: pip install Flask-Mail
 
 load_dotenv()
-
-spotify_token = get_token()
-
 
 def login_required(f):
     @wraps(f)
@@ -59,7 +59,7 @@ def save_users(users):
 def send_verification_email(user_email, token):
     verification_url = url_for("verify_email", token=token, _external=True)
     msg = Message(
-        subject="Verify Your Email",
+        subject="Verify Your Email (Spinning Site)",
         recipients=[user_email],
         body=f"Welcome!\n\nPlease click the link below to verify your email:\n{verification_url}\n\nThis link expires in 1 hour."
     )
@@ -152,24 +152,32 @@ def signup():
 
 @app.route("/verify/<token>")
 def verify_email(token):
+    message = "Invalid or expired token. Please try signing up again."
     try:
         email = serializer.loads(
             token,
             salt="email-verify",
             max_age=3600  # 1 hour
         )
+        users = load_users()
+        user_found = False
+        for user in users.values():
+            if user["email"] == email:
+                if not user.get("verified", False):
+                    user["verified"] = True
+                    save_users(users)
+                    message = "Email successfully verified! You can now log in."
+                else:
+                    message = "This email has already been verified."
+                user_found = True
+                break
+        
+        if not user_found:
+            message = "User not found. Your verification link may be incorrect."
+
     except Exception:
-        return "Invalid or expired token"
-
-    users = load_users()
-
-    for user in users.values():
-        if user["email"] == email:
-            user["verified"] = True
-            save_users(users)
-            return "Email verified! You can now log in."
-
-    return "User not found"
+        pass
+    return render_template("verify.html", message=message)
 
 
 @app.route("/editlesson", methods=["GET", "POST"])
@@ -194,11 +202,13 @@ def search_songs():
     if not query:
         return jsonify([])
 
-    songs = search_for_song(spotify_token, query)
+    songs = search_for_song(query)
+    if not songs:
+        return jsonify([])
     results = [
         {
             "name": song["name"],
-            "songId": f"{song['id']}"
+            "songId": f'{song["id"]}'
         }
         for song in songs
     ]
@@ -212,7 +222,7 @@ def get_song_data():
     if not song_id:
         return jsonify({"error": "Missing song ID"}), 400
 
-    headers = {"Authorization": f"Bearer {spotify_token}"}
+    headers = get_auth_header()
 
     # --- Get basic track info (name, album, cover, etc.) ---
     track_res = requests.get(f"https://api.spotify.com/v1/tracks/{song_id}", headers=headers)
@@ -227,16 +237,23 @@ def get_song_data():
     else:
         features = features_res.json()
 
+    # --- Format duration --- 
+    duration_ms = track.get("duration_ms", 0)
+    minutes = duration_ms // 60000
+    seconds = (duration_ms % 60000) // 1000
+    duration_formatted = f"{minutes}:{seconds:02}"
+
     # --- Merge the two sets of data ---
     song_data = {
         "id": track["id"],
         "name": track["name"],
+        "artists": [artist["name"] for artist in track["artists"]],
         "album_cover": track["album"]["images"][0]["url"] if track["album"]["images"] else None,
-        "duration_ms": track["duration_ms"],
+        "duration": duration_formatted,
 
         # Audio features
-        "bpm": round(features.get("tempo", 0), 2) if features else None,
-        "energy": features.get("energy") if features else None
+        "bpm": round(features["tempo"], 2) if "tempo" in features else None,
+        "energy": features["energy"] if "energy" in features else None
     }
 
     return jsonify(song_data)
