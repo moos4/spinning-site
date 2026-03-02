@@ -22,7 +22,9 @@ def login_required(f):
 
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY")
+app.secret_key = os.environ.get("APP_SECRET_KEY")
+app.config["SERVER_NAME"] = "5000-firebase-spinning-site-1772184200699.cluster-64pjnskmlbaxowh5lzq6i7v4ra.cloudworkstations.dev"
+app.config["PREFERRED_URL_SCHEME"] = "https"
 
 serializer = URLSafeTimedSerializer(app.secret_key)
 
@@ -240,4 +242,4 @@ def get_song_data():
     return jsonify(song_data)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

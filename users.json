@@ -1,8 +1,20 @@
 {
-  "0": {
-    "username": "testuser",
-    "email": "testemail@gmail.com",
-    "password": "hashedpass (IS INCORRECT ATM BECAUSE NOT A REAL HASH)",
-    "verified": true
-  }
+    "0": {
+        "username": "testuser",
+        "email": "testemail@gmail.com",
+        "password": "hashedpass (IS INCORRECT ATM BECAUSE NOT A REAL HASH)",
+        "verified": true
+    },
+    "1": {
+        "username": "admin",
+        "email": "spinning.site.official@gmail.com",
+        "password": "scrypt:32768:8:1$RvWD0ADUIDJWSjXn$0a03ef6ce6b0123675efbc2c4a61e8be548079adc17be954f0672d57db30aaa2390bbb47a809d47c97abd3fe11520767457f84975c067289cb053bee9b0b920a",
+        "verified": true
+    },
+    "2": {
+        "username": "wetesting",
+        "email": "mers.kaas.wat@gmail.com",
+        "password": "scrypt:32768:8:1$IM4h0McudrnzxLg5$d3583afbd1b371cd90c567fa74fa18b119b7ec2d48998da2c96717ca9612d4728767273d686f19f85bbe8513fa2cb5eb531148b28eba07bfe33244885dc1a63f",
+        "verified": true
+    }
 }
