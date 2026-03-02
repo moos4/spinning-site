@@ -1,9 +1,75 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-    </head>
-    <body>
-        <h1>Err. 404</h1>
-    </body>
+<head>
+<style>
+body {
+    background-color: rgba(0, 146, 255, 0.3);
+    font-family: tahoma;
+    height: 100vh;
+}
+.genericbutton {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: lightblue;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    border: none;
+    outline: none;
+
+    width: auto;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.infocontainer {
+  width:960px;
+  height:auto;
+  background-color:white;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  background-color: #c7e7ff;
+  border-radius: 20px;
+  padding: 20px;
+}
+.errormsg {
+  font-size: 1.7em;
+  text-align: center;
+}
+
+.big404 {
+  font-size: 10em;
+  text-align: center;
+}
+.backtohomelink {
+  width: 140px;
+  height: 40px;
+  color: black;
+  text-decoration: none;
+  border-radius:25px;
+  z-index:10;
+  box-shadow:none;
+  padding-bottom:2px;
+  left: 50%;
+  transform: translatex(-50%);
+  top: 38px;
+}
+</style>
+</head>
+<body>
+<div class="infocontainer">
+  <h1 class="big404">404</h1>
+  <h1 class="errormsg"> Oops! Something went wrong, please go back to the home page.</h1>
+  <a class="genericbutton backtohomelink" href="moos4/spinning-site/templates/login.html">Back to home page</a>
+</div>
+
+
+</body>
+
 </html>
